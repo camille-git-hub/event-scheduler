@@ -27,12 +27,11 @@ function App() {
           <Route index element={<Home />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='register' element={<SignUpPage />} />
-          <Route path="api/events" element={<EventsPage />} />
-    
+
           <Route path='api' element={<ProtectedRoute />}>
-            <Route path="api/new-event" element={<CreateEventPage />} />
-            <Route path="api/my-events" element={<EventsPage />} />
-            <Route path="api/events/:id" element={<EventDetailPage />} />
+            <Route path="new-event" element={<CreateEventPage />} />
+            <Route path="events" element={<EventsPage />} />
+            <Route path="events/:id" element={<EventDetailPage />} />
           {/* We might need more routes here */}
           </Route>
         </Route>
