@@ -6,9 +6,19 @@ import SignUpPage from './pages/SignUpPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import EventsPage from './pages/EventsPage.jsx';
 import EventDetailPage from './pages/EventDetailPage.jsx';
+import CreateEventPage from './pages/CreateEventPage.jsx';
+import { getAllEvents } from './services/api';
+import { useEffect } from 'react';
 
 
 function App() {
+
+  useEffect(() => {
+    getAllEvents().then(events => {
+    console.log('Events:', events);
+    });
+    }, []);
+ 
   
   return (
     <Router>
@@ -17,11 +27,12 @@ function App() {
           <Route index element={<Home />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='register' element={<SignUpPage />} />
-          
+          <Route path="api/events" element={<EventsPage />} />
     
-          <Route path='app' element={<ProtectedRoute />}>
-            <Route path="app/events" element={<EventsPage />} />
-            <Route path="app/events/:id" element={<EventDetailPage />} />
+          <Route path='api' element={<ProtectedRoute />}>
+            <Route path="api/new-event" element={<CreateEventPage />} />
+            <Route path="api/my-events" element={<EventsPage />} />
+            <Route path="api/events/:id" element={<EventDetailPage />} />
           {/* We might need more routes here */}
           </Route>
         </Route>
