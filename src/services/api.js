@@ -13,8 +13,8 @@ const getAllEvents = async () => {
         if (!response.ok) {
             throw new Error(`Error found: ${response.status})`);
         }
-        const result = await response.json();
-        return result;
+        const data = await response.json();
+        return data.results;
     } catch (err) {
         console.error('Error:', err);
     }

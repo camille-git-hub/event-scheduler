@@ -12,13 +12,6 @@ import { useEffect } from 'react';
 
 
 function App() {
-
-  useEffect(() => {
-    getAllEvents().then(events => {
-    console.log('Events:', events);
-    });
-    }, []);
- 
   
   return (
     <Router>

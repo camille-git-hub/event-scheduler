@@ -1,8 +1,13 @@
-const EventCard = () => {
+
+const EventCard = ({ event }) => {
   return (
     <div>
       <h1>Event Card</h1>
-      {/* Event card content goes here */}
+      <ul>
+        <li>{event.title}</li>
+        <li>Date: {new Date(event.date).toLocaleDateString('en-GB', { timeZone: 'Europe/Berlin' })}</li>
+        <li>Location: {event.location}</li>
+      </ul>
     </div>
   );
 }
