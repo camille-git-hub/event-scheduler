@@ -1,23 +1,29 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/mainlayout.jsx';
+import Home from './pages/Home.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import EventsPage from './pages/EventsPage.jsx';
+import EventDetailPage from './pages/EventDetailPage.jsx';
+
 
 function App() {
   
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<MainLayout setToken={setToken} />}>
+        <Route path='/' element={<MainLayout />}>
           <Route index element={<Home />} />
-          <Route path='login' element={<Login setToken={setToken} />} />
-          <Route path='register' element={<Register />} />
+          <Route path='login' element={<LoginPage />} />
+          <Route path='register' element={<SignUpPage />} />
           
-        <AuthRoute>
-          <Route path='app' element={<IsLogin isLogin={isLogin} />}>
-            <Route path="app/events" element={<Events />} />
-            <Route path="app/events/:id" element={<EventDetails />} />
+    
+          <Route path='app' element={<ProtectedRoute />}>
+            <Route path="app/events" element={<EventsPage />} />
+            <Route path="app/events/:id" element={<EventDetailPage />} />
           {/* We might need more routes here */}
           </Route>
-        </AuthRoute>
         </Route>
       </Routes>
     </Router>

@@ -1,0 +1,11 @@
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = true; // Replace with actual authentication logic
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
+
+export default ProtectedRoute;

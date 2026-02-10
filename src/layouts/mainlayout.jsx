@@ -1,13 +1,13 @@
-import Outlet from 'react-router';
+import {Outlet} from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-function MainLayout({setToken}) {
+function MainLayout({}) {
 
   return (
     <div className="">
       <header className="">
-        <Navbar setToken={setToken} />
+        <Navbar />
       </header>
       <main className="">
         <Outlet />
@@ -17,4 +17,4 @@ function MainLayout({setToken}) {
   );
 }
 
-export default MainLayout();
+export default MainLayout;
