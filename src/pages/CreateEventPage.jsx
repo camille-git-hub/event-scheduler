@@ -1,14 +1,3 @@
-// const CreateEventPage = () => {
-//   return (
-//     <div>
-//       <h1>Create Event Page</h1>
-//       {/* Create event form goes here */}
-//     </div>
-//   );
-// }       
-
-// export default CreateEventPage;
-
 import React, { useState } from "react";
 import { createEvent } from "../services/api.js";
 import { useNavigate } from "react-router-dom";

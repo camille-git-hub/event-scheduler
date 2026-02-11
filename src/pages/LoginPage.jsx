@@ -1,14 +1,3 @@
-// const LoginPage = () => {
-//   return (
-//     <div>
-//       <h1>Login Page</h1>
-//       {/* Login form goes here */}
-//     </div>
-//   );
-// };
-
-// export default LoginPage;
-
 import React, { useState } from "react";
 import { login } from "../services/api.js";
 import { useNavigate, Link } from "react-router-dom";
@@ -29,13 +18,10 @@ export default function LoginPage() {
     try {
       setError("");
 
-      // Login API call
       const data = await login({ email, password });
 
-      // Your API usually returns token like: { token: "..." }
       loginUser(data.token);
 
-      // Go home
       navigate("/");
     } catch (e2) {
       setError(e2.message);

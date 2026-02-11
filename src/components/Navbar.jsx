@@ -1,15 +1,56 @@
-const Navbar = () => {
+import React from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
+
+export default function Navbar() {
+  const { isAuthenticated, logoutUser } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logoutUser();
+    navigate("/"); 
+  }
+
   return (
-    <nav className="w-full flex items-center justify-between px-4">
-      <h1 className="text-xl font-bold">Event Scheduler</h1>
-        <div>
-            <ul>
-                <li className="btn secondary text-center p-4 bg-base-200"><a href="/">Home</a></li>
-                <li className="btn secondary text-center p-4 bg-base-200"><a href="/login">Login</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div className="navbar bg-base-100 shadow">
+      <div className="flex-1">
+        <Link to="/" className="btn btn-ghost text-xl">
+          Event Scheduler
+        </Link>
+      </div>
+
+      <div className="flex-none gap-2">
+        <NavLink to="/" className="btn btn-ghost">
+          Home
+        </NavLink>
+
+        <NavLink to="/events" className="btn btn-ghost">
+          Events
+        </NavLink>
+
+        {isAuthenticated && (
+          <NavLink to="/events/create" className="btn btn-primary">
+            Create
+          </NavLink>
+        )}
+
+        {!isAuthenticated && (
+          <>
+            <NavLink to="/login" className="btn btn-ghost">
+              Login
+            </NavLink>
+            <NavLink to="/signup" className="btn btn-ghost">
+              Sign Up
+            </NavLink>
+          </>
+        )}
+
+        {isAuthenticated && (
+          <button onClick={handleLogout} className="btn btn-outline">
+            Logout
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
-
-export default Navbar;

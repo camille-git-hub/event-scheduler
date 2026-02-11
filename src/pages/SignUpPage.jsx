@@ -1,14 +1,3 @@
-// const SignUpPage = () => {
-//   return (
-//     <div>
-//       <h1>Sign Up Page</h1>
-//       {/* Sign up form goes here */}
-//     </div>
-//   );
-// };
-
-// export default SignUpPage;  
-
 import React, { useState } from "react";
 import { signUp } from "../services/api.js";
 import { useNavigate, Link } from "react-router-dom";
@@ -27,10 +16,8 @@ export default function SignUpPage() {
     try {
       setError("");
 
-      // send to API
       await signUp({ email, password });
 
-      // on success: go to login
       navigate("/login");
     } catch (e2) {
       setError(e2.message);

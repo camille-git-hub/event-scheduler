@@ -1,9 +1,9 @@
-const Footer = () => {
+import React from "react";
+
+export default function Footer() {
   return (
-    <footer className="w-full bg-gray-800 text-white h-12 flex items-center justify-center">
-      <p>© 2026 Event Scheduler. All rights reserved.</p>
+    <footer className="p-6 text-center opacity-70">
+      <p>© {new Date().getFullYear()} Event Scheduler. All rights reserved.</p>
     </footer>
   );
 }
-
-export default Footer;

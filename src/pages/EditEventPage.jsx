@@ -1,13 +1,3 @@
-// const EditEventPage = () => {
-//   return (
-//     <div>
-//       <h1>Edit Event Page</h1>
-//       {/* Edit event form goes here */}
-//     </div>
-//   );
-// }       
-// export default EditEventPage;
-
 import React, { useEffect, useState } from "react";
 import { getEventById, updateEvent } from "../services/api.js";
 import { useNavigate, useParams } from "react-router-dom";

@@ -1,21 +1,10 @@
-// const EventDetailPage = () => {
-//   return (
-//     <div>
-//       <h1>Event Detail Page</h1>
-//       {/* Event details content goes here */}
-//     </div>
-//   );
-// };
-
-// export default EventDetailPage;
-
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { deleteEvent, getEventById } from "../services/api.js";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function EventDetailPage() {
-  const { id } = useParams(); // grabs :id from URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
