@@ -1,10 +1,86 @@
-const EventDetailPage = () => {
+// const EventDetailPage = () => {
+//   return (
+//     <div>
+//       <h1>Event Detail Page</h1>
+//       {/* Event details content goes here */}
+//     </div>
+//   );
+// };
+
+// export default EventDetailPage;
+
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { deleteEvent, getEventById } from "../services/api.js";
+import { useAuth } from "../context/AuthContext.jsx";
+
+export default function EventDetailPage() {
+  const { id } = useParams(); // grabs :id from URL
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const [event, setEvent] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        setError("");
+        const data = await getEventById(id);
+        setEvent(data);
+      } catch (e) {
+        setError(e.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    load();
+  }, [id]);
+
+  async function handleDelete() {
+    try {
+      await deleteEvent(id);
+      navigate("/events");
+    } catch (e) {
+      setError(e.message);
+    }
+  }
+
+  if (loading) return <p>Loading event...</p>;
+  if (error) return <div className="alert alert-error">{error}</div>;
+  if (!event) return <div className="alert">Event not found.</div>;
+
   return (
-    <div>
-      <h1>Event Detail Page</h1>
-      {/* Event details content goes here */}
+    <div className="space-y-4">
+      <h1 className="text-3xl font-bold">{event.title}</h1>
+
+      <p className="opacity-70">{event.date ? `Date: ${event.date}` : "No date"}</p>
+      <p className="opacity-70">{event.location ? `Location: ${event.location}` : "No location"}</p>
+
+      <div className="card bg-base-100 shadow">
+        <div className="card-body">
+          <p>{event.description || "No description."}</p>
+        </div>
+      </div>
+
+      <div className="flex gap-2">
+        <Link to="/events" className="btn btn-ghost">
+          Back
+        </Link>
+
+        {isAuthenticated && (
+          <>
+            <Link to={`/events/${id}/edit`} className="btn btn-outline">
+              Edit
+            </Link>
+            <button onClick={handleDelete} className="btn btn-error">
+              Delete
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
-};
-
-export default EventDetailPage;
+}
