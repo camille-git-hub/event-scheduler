@@ -7,10 +7,9 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import EventsPage from './pages/EventsPage.jsx';
 import EventDetailPage from './pages/EventDetailPage.jsx';
 import CreateEventPage from './pages/CreateEventPage.jsx';
-import { getAllEvents } from './services/api';
-import { useEffect } from 'react';
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-
+//just to test the fetch
 function App() {
   
   return (
@@ -29,8 +28,6 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </Router>
-  )
-}
+</Router> ) }
 
-export default App
+export default App;

@@ -1,9 +1,6 @@
 const API_URL = "http://localhost:3001";
 
-//`${API_URL}/events` 
-//`${API_URL}/auth/login`  
-
-const getToken = () => {
+function getToken() {
   return localStorage.getItem("token");
 }
 
