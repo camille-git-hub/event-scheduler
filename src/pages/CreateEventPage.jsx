@@ -12,7 +12,7 @@ export default function CreateEventPage() {
       setError("");
       const created = await createEvent(formData);
 
-      navigate(`/events/${created.id}`);
+      navigate(`/api/events/${created.id}`);
     } catch (e) {
       setError(e.message);
     }

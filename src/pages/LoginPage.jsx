@@ -54,7 +54,7 @@ export default function LoginPage() {
       </form>
 
       <p className="text-sm opacity-70">
-        New here? <Link className="link" to="/signup">Create account</Link>
+        New here? <Link className="link" to="/register">Create account</Link>
       </p>
     </div>
   );

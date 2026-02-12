@@ -28,7 +28,7 @@ export default function Navbar() {
         </NavLink>
 
         {isAuthenticated && (
-          <NavLink to="/events/create" className="btn btn-primary">
+          <NavLink to="/new-event" className="btn btn-primary">
             Create
           </NavLink>
         )}
@@ -38,7 +38,7 @@ export default function Navbar() {
             <NavLink to="/login" className="btn btn-ghost">
               Login
             </NavLink>
-            <NavLink to="/signup" className="btn btn-ghost">
+            <NavLink to="/register" className="btn btn-ghost">
               Sign Up
             </NavLink>
           </>
