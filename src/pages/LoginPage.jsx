@@ -29,7 +29,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto space-y-4">
+    <div className="max-w-md mx-auto space-y-4 mt-10 p-4">
       <h1 className="text-3xl font-bold">Login</h1>
 
       {error && <div className="alert alert-error">{error}</div>}

@@ -4,6 +4,25 @@ function getToken() {
   return localStorage.getItem("token");
 }
 
+const getIncomingEvents = async () => {
+    try {
+        const response = await fetch(`${API_URL}/api/events/incoming`); 
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const data = await response.json();
+        console.log('Raw data received:', data);
+        console.log('Is array?', Array.isArray(data));
+        console.log('Data length:', data?.length);
+        
+        return Array.isArray(data) ? data : [];
+    } catch (err) {
+        console.error('Error:', err);
+        throw new Error('Failed to load events. Please try again.');
+
+    }
+};
+
 const getAllEvents = async () => {
     try {
         const response = await fetch(`${API_URL}/api/events`); 
@@ -14,7 +33,7 @@ const getAllEvents = async () => {
         return data.results;
     } catch (err) {
         console.error('Error:', err);
-        throw new Error('Failed to register user. Please try again.');
+        throw new Error('Failed to load events. Please try again.');
 
     }
 };
@@ -138,4 +157,4 @@ const deleteEvent = async (id) => {
     }
 };
 
-export { getAllEvents, getToken, signUp, createEvent, getEventById, updateEvent, deleteEvent, login };  
+export { getIncomingEvents, getAllEvents, getToken, signUp, createEvent, getEventById, updateEvent, deleteEvent, login };  
