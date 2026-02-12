@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import EventsPage from './pages/EventsPage.jsx';
 import EventDetailPage from './pages/EventDetailPage.jsx';
 import CreateEventPage from './pages/CreateEventPage.jsx';
+import EditEventPage from './pages/EditEventPage.jsx';
 
 function App() {
   

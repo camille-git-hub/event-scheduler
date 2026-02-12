@@ -14,12 +14,14 @@ const getAllEvents = async () => {
         return data.results;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to register user. Please try again.');
+
     }
 };
 
 const signUp = async (userData) => {
     try {
-        const response = await fetch(`${API_URL}/auth/register`, {
+        const response = await fetch(`${API_URL}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,12 +35,13 @@ const signUp = async (userData) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to register user. Please try again.');
     }
 };
 
 const login = async (credentials) => {
     try {
-        const response = await fetch(`${API_URL}/auth/login`, {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,6 +55,7 @@ const login = async (credentials) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to login. Please check your credentials and try again.');
     }
 };
 
@@ -73,6 +77,7 @@ const createEvent = async (eventData) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to create event. Please try again.');
     }
 };
 
@@ -94,6 +99,8 @@ const updateEvent = async (id, eventData) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to update event. Please try again.');
+
     }
 };
 
@@ -107,6 +114,7 @@ const getEventById = async (id) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to fetch event details. Please try again.');
     }
 };
 
@@ -126,6 +134,7 @@ const deleteEvent = async (id) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to delete event. Please try again.');
     }
 };
 
