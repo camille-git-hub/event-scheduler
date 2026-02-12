@@ -1,10 +1,22 @@
-const EventCard = () => {
+import React from "react";
+import { Link } from "react-router-dom";
+
+export default function EventCard({ event }) {
   return (
-    <div>
-      <h1>Event Card</h1>
-      {/* Event card content goes here */}
+    <div className="card bg-base-100 shadow">
+      <div className="card-body">
+        <h2 className="card-title">{event.title}</h2>
+
+        <p className="opacity-70">
+          {event.date ? `Date: ${event.date}` : "No date provided"}
+        </p>
+
+        <div className="card-actions justify-end">
+          <Link to={`/events/${event.id}`} className="btn btn-sm btn-primary">
+            View
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
-
-export default EventCard;

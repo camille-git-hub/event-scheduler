@@ -10,6 +10,9 @@ import CreateEventPage from './pages/CreateEventPage.jsx';
 import { getAllEvents } from './services/api';
 import { useEffect } from 'react';
 
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
 
@@ -40,4 +43,9 @@ function App() {
   )
 }
 
-export default App
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
