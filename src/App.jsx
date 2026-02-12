@@ -7,9 +7,8 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import EventsPage from './pages/EventsPage.jsx';
 import EventDetailPage from './pages/EventDetailPage.jsx';
 import CreateEventPage from './pages/CreateEventPage.jsx';
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-//just to test the fetch
+
 function App() {
   
   return (
@@ -24,7 +23,6 @@ function App() {
             <Route path="new-event" element={<CreateEventPage />} />
             <Route path="events" element={<EventsPage />} />
             <Route path="events/:id" element={<EventDetailPage />} />
-          {/* We might need more routes here */}
           </Route>
         </Route>
       </Routes>
