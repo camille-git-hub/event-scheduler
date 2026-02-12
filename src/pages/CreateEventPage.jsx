@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { createEvent } from "../services/api.js";
 import { useNavigate } from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";
@@ -12,7 +12,7 @@ export default function CreateEventPage() {
       setError("");
       const created = await createEvent(formData);
 
-      navigate(`/events/${created.id}`);
+      navigate(`/api/events/${created.id}`);
     } catch (e) {
       setError(e.message);
     }

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { createEvent } from "../services/api";
+
 
 export default function EventForm({ initialValues, onSubmit, submitText }) {
   const [title, setTitle] = useState(initialValues.title || "");
@@ -26,6 +28,8 @@ export default function EventForm({ initialValues, onSubmit, submitText }) {
     };
 
     onSubmit(formData);
+
+    createEvent(formData);
   }
 
   return (

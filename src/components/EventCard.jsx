@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 export default function EventCard({ event }) {
@@ -6,9 +5,9 @@ export default function EventCard({ event }) {
     <div className="card bg-base-100 shadow">
       <div className="card-body">
         <h2 className="card-title">{event.title}</h2>
-
+    
         <p className="opacity-70">
-          {event.date ? `Date: ${event.date}` : "No date provided"}
+          {event.date ? `Date: ${new Date(event.date).toLocaleDateString('en-GB', { timeZone: 'Europe/Berlin' })}` : "No date provided"}
         </p>
 
         <div className="card-actions justify-end">

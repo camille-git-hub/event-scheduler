@@ -1,6 +1,5 @@
-import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const { isAuthenticated, logoutUser } = useAuth();
@@ -8,7 +7,7 @@ export default function Navbar() {
 
   function handleLogout() {
     logoutUser();
-    navigate("/"); 
+    navigate("/");
   }
 
   return (
@@ -24,12 +23,14 @@ export default function Navbar() {
           Home
         </NavLink>
 
-        <NavLink to="/events" className="btn btn-ghost">
-          Events
-        </NavLink>
+        
+          <NavLink to="/events" className="btn btn-ghost">
+            Events
+          </NavLink>
+        
 
         {isAuthenticated && (
-          <NavLink to="/events/create" className="btn btn-primary">
+          <NavLink to="/new-event" className="btn btn-primary">
             Create
           </NavLink>
         )}
@@ -39,7 +40,7 @@ export default function Navbar() {
             <NavLink to="/login" className="btn btn-ghost">
               Login
             </NavLink>
-            <NavLink to="/signup" className="btn btn-ghost">
+            <NavLink to="/register" className="btn btn-ghost">
               Sign Up
             </NavLink>
           </>

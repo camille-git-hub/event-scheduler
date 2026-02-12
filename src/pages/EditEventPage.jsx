@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getEventById, updateEvent } from "../services/api.js";
 import { useNavigate, useParams } from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";

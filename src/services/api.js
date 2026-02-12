@@ -4,22 +4,43 @@ function getToken() {
   return localStorage.getItem("token");
 }
 
+const getIncomingEvents = async () => {
+    try {
+        const response = await fetch(`${API_URL}/api/events/incoming`); 
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const data = await response.json();
+        console.log('Raw data received:', data);
+        console.log('Is array?', Array.isArray(data));
+        console.log('Data length:', data?.length);
+        
+        return Array.isArray(data) ? data : [];
+    } catch (err) {
+        console.error('Error:', err);
+        throw new Error('Failed to load events. Please try again.');
+
+    }
+};
+
 const getAllEvents = async () => {
     try {
         const response = await fetch(`${API_URL}/api/events`); 
         if (!response.ok) {
             throw new Error(`Error found: ${response.status})`);
         }
-        const result = await response.json();
-        return result;
+        const data = await response.json();
+        return data.results;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to load events. Please try again.');
+
     }
 };
 
 const signUp = async (userData) => {
     try {
-        const response = await fetch(`${API_URL}/auth/register`, {
+        const response = await fetch(`${API_URL}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,12 +54,13 @@ const signUp = async (userData) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to register user. Please try again.');
     }
 };
 
 const login = async (credentials) => {
     try {
-        const response = await fetch(`${API_URL}/auth/login`, {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,6 +74,7 @@ const login = async (credentials) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to login. Please check your credentials and try again.');
     }
 };
 
@@ -73,6 +96,7 @@ const createEvent = async (eventData) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to create event. Please try again.');
     }
 };
 
@@ -94,6 +118,8 @@ const updateEvent = async (id, eventData) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to update event. Please try again.');
+
     }
 };
 
@@ -107,6 +133,7 @@ const getEventById = async (id) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to fetch event details. Please try again.');
     }
 };
 
@@ -126,7 +153,8 @@ const deleteEvent = async (id) => {
         return result;
     } catch (err) {
         console.error('Error:', err);
+        throw new Error('Failed to delete event. Please try again.');
     }
 };
 
-export { getAllEvents, getToken, signUp, createEvent, getEventById, updateEvent, deleteEvent, login };  
+export { getIncomingEvents, getAllEvents, getToken, signUp, createEvent, getEventById, updateEvent, deleteEvent, login };  

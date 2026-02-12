@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { deleteEvent, getEventById } from "../services/api.js";
 import { useAuth } from "../context/AuthContext.jsx";
@@ -42,11 +42,11 @@ export default function EventDetailPage() {
   if (!event) return <div className="alert">Event not found.</div>;
 
   return (
-    <div className="space-y-4">
-      <h1 className="text-3xl font-bold">{event.title}</h1>
+    <div className="space-y-4 max-w-2xl mx-auto p-4 mt-6">
+      <h1 className="text-3xl font-bold text-blue-700">{event.title}</h1>
 
-      <p className="opacity-70">{event.date ? `Date: ${event.date}` : "No date"}</p>
-      <p className="opacity-70">{event.location ? `Location: ${event.location}` : "No location"}</p>
+      <p className="opacity-70">{event.date ? `Date: ${new Date(event.date).toLocaleDateString('en-GB', { timeZone: 'Europe/Berlin' })}` : "No date"}</p>
+      <p className="text-blue-700">{event.location ? `Location: ${event.location}` : "No location"}</p>
 
       <div className="card bg-base-100 shadow">
         <div className="card-body">
