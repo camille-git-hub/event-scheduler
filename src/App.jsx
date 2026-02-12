@@ -1,52 +1,47 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from './layouts/mainlayout.jsx';
+import Home from './pages/Home.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import EventsPage from './pages/EventsPage.jsx';
+import EventDetailPage from './pages/EventDetailPage.jsx';
+import CreateEventPage from './pages/CreateEventPage.jsx';
+import { getAllEvents } from './services/api';
+import { useEffect } from 'react';
 
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-import Home from "./pages/Home.jsx";
-import SignUpPage from "./pages/SignUpPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import EventsPage from "./pages/EventsPage.jsx";
-import EventDetailPage from "./pages/EventDetailPage.jsx";
-import CreateEventPage from "./pages/CreateEventPage.jsx";
-import EditEventPage from "./pages/EditEventPage.jsx";
+function App() {
 
-import { AuthProvider } from "./context/AuthContext.jsx";
-
-export default function App() {
+  useEffect(() => {
+    getAllEvents().then(events => {
+    console.log('Events:', events);
+    });
+    }, []);
+ 
+  
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-1 p-6 max-w-5xl w-full mx-auto">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/events" element={<EventsPage />} />
-              <Route path="/events/:id" element={<EventDetailPage />} />
+    <Router>
+      <Routes>
+        <Route path='/' element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path='login' element={<LoginPage />} />
+          <Route path='register' element={<SignUpPage />} />
 
-              <Route path="/signup" element={<SignUpPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route
-                path="/events/create"
-                element={
-                  <ProtectedRoute>
-                    <CreateEventPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/events/:id/edit"
-                element={
-                  <ProtectedRoute>
-                    <EditEventPage />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </main>
+          <Route path='api' element={<ProtectedRoute />}>
+            <Route path="new-event" element={<CreateEventPage />} />
+            <Route path="events" element={<EventsPage />} />
+            <Route path="events/:id" element={<EventDetailPage />} />
+          {/* We might need more routes here */}
+          </Route>
+        </Route>
+      </Routes>
+    </Router>
+  )
+}
 
           <Footer />
         </div>

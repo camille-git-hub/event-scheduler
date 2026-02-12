@@ -1,98 +1,132 @@
-const API_BASE_URL = "http://localhost:3001";
+const API_URL = "http://localhost:3001";
 
 function getToken() {
   return localStorage.getItem("token");
 }
 
-async function request(path, options = {}) {
-  const url = `${API_BASE_URL}${path}`;
+const getAllEvents = async () => {
+    try {
+        const response = await fetch(`${API_URL}/api/events`); 
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+};
 
-  const token = getToken();
+const signUp = async (userData) => {
+    try {
+        const response = await fetch(`${API_URL}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        });
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+};
 
-  const headers = {
-    "Content-Type": "application/json",
-    ...(options.headers || {}),
-  };
+const login = async (credentials) => {
+    try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credentials),
+        });
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+};
 
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
+const createEvent = async (eventData) => {
+    try {
+        const token = getToken();
+        const response = await fetch(`${API_URL}/api/events`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(eventData),
+        });
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+};
 
-  const res = await fetch(url, {
-    ...options,
-    headers,
-  });
+const updateEvent = async (id, eventData) => {
+    try {
+        const token = getToken();
+        const response = await fetch(`${API_URL}/api/events/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(eventData),
+        });
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+};
 
-  let data = null;
-  try {
-    data = await res.json();
-  } catch {
-  }
+const getEventById = async (id) => {
+    try {
+        const response = await fetch(`${API_URL}/api/events/${id}`);
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+};
 
-  if (!res.ok) {
-    const message =
-      (data && (data.message || data.error)) ||
-      `Request failed with status ${res.status}`;
-    throw new Error(message);
-  }
+const deleteEvent = async (id) => {
+    try {
+        const token = getToken();
+        const response = await fetch(`${API_URL}/api/events/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`Error found: ${response.status})`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+};
 
-  return data;
-}
-
-/* ---------------------------
-   EVENTS
----------------------------- */
-
-// Get all events
-export function getEvents() {
-  // GET /api/events
-  return request("/api/events");
-}
-
-export function getEventById(id) {
-  // GET /api/events/:id
-  return request(`/api/events/${id}`);
-}
-
-export function createEvent(eventBody) {
-  // POST /api/events
-  return request("/api/events", {
-    method: "POST",
-    body: JSON.stringify(eventBody),
-  });
-}
-
-export function updateEvent(id, eventBody) {
-  // PUT /api/events/:id
-  return request(`/api/events/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(eventBody),
-  });
-}
-
-export function deleteEvent(id) {
-  // DELETE /api/events/:id
-  return request(`/api/events/${id}`, {
-    method: "DELETE",
-  });
-}
-
-/* ---------------------------
-   AUTH
----------------------------- */
-
-export function signUp(userBody) {
-  // POST /api/users
-  return request("/api/users", {
-    method: "POST",
-    body: JSON.stringify(userBody),
-  });
-}
-
-export function login(credentials) {
-  // POST /api/auth/login
-  return request("/api/auth/login", {
-    method: "POST",
-    body: JSON.stringify(credentials),
-  });
-}
+export { getAllEvents, getToken, signUp, createEvent, getEventById, updateEvent, deleteEvent, login };  
