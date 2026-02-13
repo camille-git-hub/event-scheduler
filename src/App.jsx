@@ -3,12 +3,12 @@ import MainLayout from "./layouts/mainlayout.jsx";
 import Home from "./pages/Home.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import EventsPage from "./pages/EventsPage.jsx";
 import EventDetailPage from "./pages/EventDetailPage.jsx";
 import CreateEventPage from "./pages/CreateEventPage.jsx";
 import EditEventPage from "./pages/EditEventPage.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   return (

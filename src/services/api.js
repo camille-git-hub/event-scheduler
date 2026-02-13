@@ -40,7 +40,7 @@ const getAllEvents = async () => {
 
 const signUp = async (userData) => {
     try {
-        const response = await fetch(`${API_URL}/api/auth/register`, {
+        const response = await fetch(`${API_URL}/api/users`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -140,20 +140,58 @@ const getEventById = async (id) => {
 const deleteEvent = async (id) => {
     try {
         const token = getToken();
+        
+        if (!token) {
+            throw new Error('You must be logged in to delete events');
+        }
+        
         const response = await fetch(`${API_URL}/api/events/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         });
+        
+        console.log('Delete response status:', response.status);
+        
         if (!response.ok) {
-            throw new Error(`Error found: ${response.status})`);
+            if (response.status === 401) {
+                throw new Error('Unauthorized. Please log in again.');
+            }
+            
+            if (response.status === 403) {
+                throw new Error('You are not authorized to delete this event.');
+            }
+            
+            if (response.status === 404) {
+                throw new Error('Event not found.');
+            }
+            
+            // Try to get error message from response
+            try {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to delete event');
+            } catch (parseError) {
+                throw new Error(`Failed to delete event: ${response.status}`);
+            }
         }
-        const result = await response.json();
-        return result;
+        
+        // Check if there's a response body
+        const text = await response.text();
+        if (text) {
+            try {
+                return JSON.parse(text);
+            } catch {
+                return { success: true, message: text };
+            }
+        }
+        
+        // Empty response means success
+        return { success: true };
+        
     } catch (err) {
         console.error('Error:', err);
-        throw new Error('Failed to delete event. Please try again.');
+        throw err;
     }
 };
 

@@ -10,9 +10,20 @@ export default function CreateEventPage() {
   async function handleCreate(formData) {
     try {
       setError("");
-      const created = await createEvent(formData);
 
-      navigate(`/api/events/${created.id}`);
+      const eventData = {
+        title: formData.title,
+        date: formData.date ? new Date(formData.date).toISOString() : null,
+        location: formData.location,
+        description: formData.description,
+      };
+
+      console.log('Form data:', formData);
+      console.log('Token:', localStorage.getItem('token'));
+
+      const created = await createEvent(eventData);
+
+      navigate(`/events/${created.id}`);
     } catch (e) {
       setError(e.message);
     }
@@ -20,7 +31,7 @@ export default function CreateEventPage() {
 
   return (
     <div className="max-w-xl mx-auto space-y-4">
-      <h1 className="text-3xl font-bold">Create Event</h1>
+      <h1 className="text-4xl text-primary font-bold mt-6">Create Event</h1>
 
       {error && <div className="alert alert-error">{error}</div>}
 
