@@ -8,7 +8,7 @@ export default function EventForm({ initialValues, onSubmit, submitText }) {
   
   const inputStyle = "input input-bordered w-full";
   const textareaStyle = "textarea textarea-bordered w-full";
-  const labelStyle = "ld:text-lg md:text-base sd:text-sm form-control w-full";
+  const labelStyle = "lg:text-lg md:text-base sm:text-sm form-control w-full";
 
   const [error, setError] = useState("");
 

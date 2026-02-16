@@ -26,7 +26,13 @@ export default function EditEventPage() {
   async function handleUpdate(formData) {
     try {
       setError("");
-      await updateEvent(id, formData);
+
+      const eventData = {
+        ...formData,
+        date: formData.date ? new Date(formData.date).toISOString() : null,
+      };
+
+      await updateEvent(id, eventData);
       navigate(`/events/${id}`);
     } catch (e) {
       setError(e.message);
@@ -38,7 +44,7 @@ export default function EditEventPage() {
 
   return (
     <div className="max-w-xl mx-auto space-y-4">
-      <h1 className="ld:text-4xl md:text-3xl sd:text-2xl text-primary font-bold mb-4 mt-6">Edit Event</h1>
+      <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-primary font-bold mb-4 mt-6">Edit Event</h1>
 
       <EventForm
         initialValues={initialValues}
