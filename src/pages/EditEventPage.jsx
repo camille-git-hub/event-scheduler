@@ -38,7 +38,7 @@ export default function EditEventPage() {
 
   return (
     <div className="max-w-xl mx-auto space-y-4">
-      <h1 className="text-3xl font-bold">Edit Event</h1>
+      <h1 className="ld:text-4xl md:text-3xl sd:text-2xl text-primary font-bold mb-4 mt-6">Edit Event</h1>
 
       <EventForm
         initialValues={initialValues}

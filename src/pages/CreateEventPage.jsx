@@ -31,7 +31,7 @@ export default function CreateEventPage() {
 
   return (
     <div className="max-w-xl mx-auto space-y-4">
-      <h1 className="text-4xl text-primary font-bold mt-6">Create Event</h1>
+      <h1 className="ld:text-4xl md:text-3xl sd:text-2xl text-primary font-bold mt-6">Create Event</h1>
 
       {error && <div className="alert alert-error">{error}</div>}
 
