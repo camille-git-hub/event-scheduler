@@ -11,7 +11,7 @@ export default function SignUpPage() {
   const [error, setError] = useState("");
 
   function validatePassword() {
-    if (!password | !email) {
+    if (!password || !email) {
       return "Please enter a valid email address and a password";
     } else if (password.length < 8) {
       return "Password needs to be at least 8 characters long.";
