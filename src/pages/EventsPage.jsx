@@ -1,12 +1,16 @@
 import EventCard from "../components/EventCard.jsx"
 import { getAllEvents } from "../services/api.js";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function EventsPage() {
 
     const [events, setEvents] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const { isAuthenticated } = useAuth();
 
     useEffect(() => {
         async function load() {
@@ -48,10 +52,18 @@ export default function EventsPage() {
 
   return <div>
     <div className="max-w-7xl mx-auto p-4 mt-6">
-      <h1 className="text-3xl font-bold mb-4">All Events</h1>
-      <div>{events.map(event => (
+      <h1 className="text-4xl text-primary font-bold mb-4 p-4">All Events</h1>
+      <div className="grid md:grid-cols-2 gap-4">{events.map(event => (
         <EventCard key={event.id} event={event} />
       ))}
+      </div>
+      <div className="flex justify-center mb-6 mt-10">
+        <button
+          onClick={() => navigate(isAuthenticated ? "/new-event" : "/login")}
+          className="btn font-bold py-2 px-4 mt-6 rounded self-center hover:bg-black-200"
+        >
+          + Create New Event
+        </button>
       </div>
     </div>
 

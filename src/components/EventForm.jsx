@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { createEvent } from "../services/api";
-
 
 export default function EventForm({ initialValues, onSubmit, submitText }) {
   const [title, setTitle] = useState(initialValues.title || "");
   const [date, setDate] = useState(initialValues.date || "");
   const [location, setLocation] = useState(initialValues.location || "");
   const [description, setDescription] = useState(initialValues.description || "");
+  
+  const inputStyle = "input input-bordered w-full";
+  const textareaStyle = "textarea textarea-bordered w-full";
 
   const [error, setError] = useState("");
 
@@ -28,48 +29,47 @@ export default function EventForm({ initialValues, onSubmit, submitText }) {
     };
 
     onSubmit(formData);
-
-    createEvent(formData);
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
       {error && <div className="alert alert-error">{error}</div>}
 
       <label className="form-control">
         <span className="label-text">Title</span>
         <input
-          className="input input-bordered"
+          className={inputStyle}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="e.g. React Workshop"
+          placeholder="Enter the title of the event"
         />
       </label>
 
       <label className="form-control">
         <span className="label-text">Date</span>
         <input
-          className="input input-bordered"
+          className={inputStyle}
+          type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          placeholder="e.g. 2026-02-10"
+          placeholder="Enter the date of the event"
         />
       </label>
 
       <label className="form-control">
         <span className="label-text">Location</span>
         <input
-          className="input input-bordered"
+          className={inputStyle}
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          placeholder="e.g. Berlin"
+          placeholder="Enter the location of the event"
         />
       </label>
 
       <label className="form-control">
         <span className="label-text">Description</span>
         <textarea
-          className="textarea textarea-bordered"
+          className={textareaStyle}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Write details..."

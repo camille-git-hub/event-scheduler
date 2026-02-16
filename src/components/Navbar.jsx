@@ -27,13 +27,6 @@ export default function Navbar() {
           <NavLink to="/events" className="btn btn-ghost">
             Events
           </NavLink>
-        
-
-        {isAuthenticated && (
-          <NavLink to="/new-event" className="btn btn-primary">
-            Create
-          </NavLink>
-        )}
 
         {!isAuthenticated && (
           <>
