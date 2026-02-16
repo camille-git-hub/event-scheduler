@@ -43,10 +43,10 @@ export default function EventDetailPage() {
 
   return (
     <div className="space-y-4 max-w-2xl mx-auto p-4 mt-6">
-      <h1 className="text-3xl font-bold text-blue-700">{event.title}</h1>
+      <h1 className="ld:text-4xl md:text-3xl sd:text-2xl text-primary font-bold mb-4 mt-6">{event.title}</h1>
 
       <p className="opacity-70">{event.date ? `Date: ${new Date(event.date).toLocaleDateString('en-GB', { timeZone: 'Europe/Berlin' })}` : "No date"}</p>
-      <p className="text-blue-700">{event.location ? `Location: ${event.location}` : "No location"}</p>
+      <p className="text-primary">{event.location ? `Location: ${event.location}` : "No location"}</p>
 
       <div className="card bg-base-100 shadow">
         <div className="card-body">
@@ -64,7 +64,7 @@ export default function EventDetailPage() {
             <Link to={`/events/${id}/edit`} className="btn btn-outline">
               Edit
             </Link>
-            <button onClick={handleDelete} className="btn btn-error">
+            <button onClick={handleDelete} className="btn btn-warning">
               Delete
             </button>
           </>

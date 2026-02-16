@@ -47,10 +47,10 @@ export default function Home() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto p-4 mt-6">
-      <h1 className="text-6xl font-bold text-center text-primary p-4">
+      <h1 className="ld:text-6xl md:text-5xl sd:text-4xl font-bold text-center text-primary p-4">
         Welcome to the Event Scheduler!
       </h1>
-      <p className="text-2xl text-gray-800 text-center max-w-1xl">
+      <p className="ld:text-2xl md:text-xl sd:text-lg text-gray-800 text-center max-w-1xl">
         Plan and manage your events with ease. Create, edit, and track all your
         events in one place. Stay organized and never miss an important date
         again!
@@ -65,7 +65,7 @@ export default function Home() {
       </div>
 
       <div className="max-w-5xl mx-auto p-4">
-        <h2 className="text-4xl text-center font-bold mt-4 mb-6">
+        <h2 className="ld:text-4xl md:text-3xl sd:text-2xl text-center font-bold mt-4 mb-6">
           Upcoming Events
         </h2>
         {error && <div className="alert alert-error">{error}</div>}

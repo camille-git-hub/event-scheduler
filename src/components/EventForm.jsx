@@ -8,6 +8,7 @@ export default function EventForm({ initialValues, onSubmit, submitText }) {
   
   const inputStyle = "input input-bordered w-full";
   const textareaStyle = "textarea textarea-bordered w-full";
+  const labelStyle = "ld:text-lg md:text-base sd:text-sm form-control w-full";
 
   const [error, setError] = useState("");
 
@@ -36,7 +37,7 @@ export default function EventForm({ initialValues, onSubmit, submitText }) {
       {error && <div className="alert alert-error">{error}</div>}
 
       <label className="form-control">
-        <span className="label-text">Title</span>
+        <span className={labelStyle}>Title</span>
         <input
           className={inputStyle}
           value={title}
@@ -46,7 +47,7 @@ export default function EventForm({ initialValues, onSubmit, submitText }) {
       </label>
 
       <label className="form-control">
-        <span className="label-text">Date</span>
+        <span className={labelStyle}>Date</span>
         <input
           className={inputStyle}
           type="date"
@@ -57,7 +58,7 @@ export default function EventForm({ initialValues, onSubmit, submitText }) {
       </label>
 
       <label className="form-control">
-        <span className="label-text">Location</span>
+        <span className={labelStyle}>Location</span>
         <input
           className={inputStyle}
           value={location}
@@ -67,7 +68,7 @@ export default function EventForm({ initialValues, onSubmit, submitText }) {
       </label>
 
       <label className="form-control">
-        <span className="label-text">Description</span>
+        <span className={labelStyle}>Description</span>
         <textarea
           className={textareaStyle}
           value={description}
