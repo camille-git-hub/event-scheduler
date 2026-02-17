@@ -1,7 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
-console.log('API_URL:', API_URL);  
-console.log('ENV:', import.meta.env.VITE_API_URL); 
+console.log('API_URL:', API_URL); 
+console.log('ENV:', import.meta.env.VITE_API_URL);
 
 function getToken() {
   return localStorage.getItem("token");
@@ -14,7 +14,6 @@ const getIncomingEvents = async () => {
             throw new Error(`Error found: ${response.status})`);
         }
         const data = await response.json();
-        console.log('Raw data received:', data);
         console.log('Is array?', Array.isArray(data));
         console.log('Data length:', data?.length);
         
@@ -33,7 +32,7 @@ const getAllEvents = async () => {
             throw new Error(`Error found: ${response.status})`);
         }
         const data = await response.json();
-        return data.results.length === 0 ? "No events found" : data.results;
+        return data.results;
     } catch (err) {
         console.error('Error:', err);
         throw new Error('Failed to load events. Please try again.');
