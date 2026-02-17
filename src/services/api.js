@@ -33,7 +33,7 @@ const getAllEvents = async () => {
             throw new Error(`Error found: ${response.status})`);
         }
         const data = await response.json();
-        return data.results;
+        return data.results.length === 0 ? "No events found" : data.results;
     } catch (err) {
         console.error('Error:', err);
         throw new Error('Failed to load events. Please try again.');
